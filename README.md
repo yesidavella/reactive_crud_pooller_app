@@ -42,3 +42,38 @@ You can also run gradle directly from the command line:
 ```
 ./gradlew clean run
 ```
+
+# Usage
+
+This app has 4 basic operations related to services:
+- List Services: GET localhost:8080/service
+- Record one Service: POST localhost:8080/service
+- Delete service by name: localhost:8080/service/{serviceName}
+- Update Service name: PATCH localhost:8080/service/{currentName}/{newName}
+
+## Inserting services
+To insert a service you just need to use the POST method with the next JSON template, replacing for the values you deserve:
+```json
+{ "key": { "term": "", "when": "" } ... }
+```
+Be aware that the URL is protected by REGEX, so prefixes like HTTP, https or www are not valid.
+VALID URL|INVALID URL
+------------- | -------------
+eltiempo.com  | www.eltiempo.com
+eltiempo.com/mundo  | https://www.eltiempo.com/mundo 
+
+**NOTE:** Now, if you user the GET method you will see all the services your web client has inserted.
+
+## Cookie implementation
+
+Whenever you use the app, the client(postman or web browser) will store a cookie called **remoteLiviClient** which will have a long random value created by the Java function UUID.randomUUID().
+So, when you call the rest service GET {host}/service, you will get as JSON **ONLY** the services inserted using "POST" by the same web client (e.g. postman).
+
+## EXECUTION FROM COMMAND LINE
+
+Download the project, navigate to the root project folder called \*reactive_crud_pooller_app-master\* and execute the next commands:
+```bash
+./gradlew clean build
+./gradlew run
+```
+**NOTE:**You will see in the CLI a kind of traces showing you what actions are taking place by the poller, regarding the services' URLs states.
