@@ -54,7 +54,10 @@ This app has 4 basic operations related to services:
 ## Inserting services
 To insert a service you just need to use the POST method with the next JSON template, replacing for the values you deserve:
 ```json
-{ "key": { "term": "", "when": "" } ... }
+{
+"name":"elGuardian",
+"url":"theguardian.com"
+}
 ```
 Be aware that the URL is protected by REGEX, so prefixes like HTTP, https or www are not valid.
 VALID URL|INVALID URL
@@ -76,4 +79,4 @@ Download the project, navigate to the root project folder called \*reactive_crud
 ./gradlew clean build
 ./gradlew run
 ```
-**NOTE:**You will see in the CLI a kind of traces showing you what actions are taking place by the poller, regarding the services' URLs states.
+**NOTE:** You will see in the CLI a kind of traces showing you what actions are taking place by the poller, regarding the services' URLs states.
